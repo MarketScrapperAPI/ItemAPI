@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package item.v1;
 
-message CreateNewItem {
+message CreateNewItemRequest {
     string name = 1;
     string brand = 2;
     string package = 3;
@@ -23,4 +23,32 @@ message CreateItemResponse {
     string quantityUnit = 7;
     string url = 8;
     string imageUrl = 9;
+}
+
+message GetItemRequest {
+    string uuid = 1;
+}
+
+message GetItemResponse {
+    string uuid = 1;
+    string name = 2;
+    string brand = 3;
+    string package = 4;
+    float pricePerItem = 5;
+    float pricePerQuantity = 6;
+    string quantityUnit = 7;
+    string url = 8;
+    string imageUrl = 9;
+}
+
+message ListItemsRequest {
+    string name = 1;
+    float pricePerItemGT = 2;
+    float pricePerItemLT = 3;
+    float pricePerQuantityGT = 4;
+    float pricePerQuantityLT = 5;
+}
+
+message ListItemsResponse {
+    repeated GetItemResponse = 1;
 }

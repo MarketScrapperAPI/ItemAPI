@@ -6,8 +6,8 @@ import "proto/item.proto";
 
 
 service ItemApi {
-    rpc CreateItem (CreateNewItem) returns (CreateItemResponse);
-    rpc GetItem (Request) returns (Response);
+    rpc CreateItem (CreateNewItemRequest) returns (CreateItemResponse);
+    rpc GetItem (GetItemRequest) returns (GetItemResponse);
     rpc ListItems (Request) returns (Response);
     rpc UpdateItem (Request) returns (Response);
     rpc DeleteItem (Request) returns (Response);
