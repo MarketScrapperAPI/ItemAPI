@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package item.v1;
+
+import "proto/item.proto";
+
+
+service ItemApi {
+    rpc CreateItem (CreateNewItem) returns (CreateItemResponse);
+    rpc GetItem (Request) returns (Response);
+    rpc ListItems (Request) returns (Response);
+    rpc UpdateItem (Request) returns (Response);
+    rpc DeleteItem (Request) returns (Response);
+}
