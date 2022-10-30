@@ -1,4 +1,4 @@
-syntax = "proto3";
+git@github.com:MarketScrapperAPI/ItemAPI.gitsyntax = "proto3";
 
 package item.v1;
 
@@ -6,9 +6,9 @@ import "proto/item.proto";
 
 
 service ItemApi {
-    rpc CreateItem (CreateNewItemRequest) returns (CreateItemResponse);
+    rpc CreateItem (CreateItemRequest) returns (CreateItemResponse);
     rpc GetItem (GetItemRequest) returns (GetItemResponse);
-    rpc ListItems (Request) returns (Response);
-    rpc UpdateItem (Request) returns (Response);
-    rpc DeleteItem (Request) returns (Response);
+    rpc ListItems (ListItemRequest) returns (ListItemResponse);
+    rpc UpdateItem (UpdateItemRequest) returns (UpdateItemResponse);
+    rpc DeleteItem (DeleteItemRequest) returns (DeleteItemResponse);
 }
