@@ -1,14 +1,97 @@
-git@github.com:MarketScrapperAPI/ItemAPI.gitsyntax = "proto3";
+syntax = "proto3";
 
-package item.v1;
+package proto;
 
-import "proto/item.proto";
-
+option go_package = "proto/gen";
 
 service ItemApi {
     rpc CreateItem (CreateItemRequest) returns (CreateItemResponse);
     rpc GetItem (GetItemRequest) returns (GetItemResponse);
-    rpc ListItems (ListItemRequest) returns (ListItemResponse);
+    rpc ListItems (ListItemsRequest) returns (ListItemsResponse);
     rpc UpdateItem (UpdateItemRequest) returns (UpdateItemResponse);
     rpc DeleteItem (DeleteItemRequest) returns (DeleteItemResponse);
+}
+
+
+message CreateItemRequest {
+    string name = 1;
+    string brand = 2;
+    string package = 3;
+    float pricePerItem = 4;
+    float pricePerQuantity = 5;
+    string quantityUnit = 6;
+    string url = 7;
+    string imageUrl = 8;
+}
+
+message CreateItemResponse {
+    string uuid = 1;
+    string name = 2;
+    string brand = 3;
+    string package = 4;
+    float pricePerItem = 5;
+    float pricePerQuantity = 6;
+    string quantityUnit = 7;
+    string url = 8;
+    string imageUrl = 9;
+}
+
+message GetItemRequest {
+    string uuid = 1;
+}
+
+message GetItemResponse {
+    string uuid = 1;
+    string name = 2;
+    string brand = 3;
+    string package = 4;
+    float pricePerItem = 5;
+    float pricePerQuantity = 6;
+    string quantityUnit = 7;
+    string url = 8;
+    string imageUrl = 9;
+}
+
+message ListItemsRequest {
+    string name = 1;
+    float pricePerItemGT = 2;
+    float pricePerItemLT = 3;
+    float pricePerQuantityGT = 4;
+    float pricePerQuantityLT = 5;
+}
+
+message ListItemsResponse {
+    repeated GetItemResponse ListItemsResponse = 1;
+}
+
+message UpdateItemRequest{
+    string uuid = 1;
+    string name = 2;
+    string brand = 3;
+    string package = 4;
+    float pricePerItem = 5;
+    float pricePerQuantity = 6;
+    string quantityUnit = 7;
+    string url = 8;
+    string imageUrl = 9;    
+}
+
+message UpdateItemResponse {
+    string uuid = 1;
+    string name = 2;
+    string brand = 3;
+    string package = 4;
+    float pricePerItem = 5;
+    float pricePerQuantity = 6;
+    string quantityUnit = 7;
+    string url = 8;
+    string imageUrl = 9;    
+}
+
+message DeleteItemRequest{
+    string uuid = 1;
+}
+
+message DeleteItemResponse{
+    string uuid = 1;
 }
