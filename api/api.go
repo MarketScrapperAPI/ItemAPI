@@ -4,9 +4,12 @@ import (
 	"log"
 	"net"
 
+	"github.com/MarketScrapperAPI/ItemAPI/domain"
 	"github.com/MarketScrapperAPI/ItemAPI/handlers"
 	pb "github.com/MarketScrapperAPI/ItemAPI/proto/gen"
+	"github.com/MarketScrapperAPI/ItemAPI/repositories"
 	"google.golang.org/grpc"
+	"gorm.io/gorm"
 )
 
 type Api struct {
@@ -15,7 +18,15 @@ type Api struct {
 	itemHandler *handlers.ItemHandler
 }
 
-func NewApi(port string) *Api {
+func NewApi(db *gorm.DB, port string) *Api {
+
+	err := db.AutoMigrate(domain.Item{})
+	if err != nil {
+		panic(err)
+	}
+
+	// create repositories
+	itemRepo := repositories.NewItemRepository(db)
 
 	// create listener
 	lis, err := net.Listen("tcp", ":"+port)
@@ -24,7 +35,7 @@ func NewApi(port string) *Api {
 	}
 
 	// create handler
-	itemHandler := handlers.NewItemHandler()
+	itemHandler := handlers.NewItemHandler(itemRepo)
 
 	//create server
 	grpcServer := grpc.NewServer()

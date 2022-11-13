@@ -4,16 +4,20 @@ import (
 	"context"
 
 	pb "github.com/MarketScrapperAPI/ItemAPI/proto/gen"
+	"github.com/MarketScrapperAPI/ItemAPI/repositories"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type ItemHandler struct {
 	pb.UnimplementedItemApiServer
+	repo *repositories.ItemRepository
 }
 
-func NewItemHandler() *ItemHandler {
-	return &ItemHandler{}
+func NewItemHandler(repo *repositories.ItemRepository) *ItemHandler {
+	return &ItemHandler{
+		repo: repo,
+	}
 }
 
 func (i *ItemHandler) CreateItem(context.Context, *pb.CreateItemRequest) (*pb.CreateItemResponse, error) {
