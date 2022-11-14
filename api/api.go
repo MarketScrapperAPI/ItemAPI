@@ -20,7 +20,13 @@ type Api struct {
 
 func NewApi(db *gorm.DB, port string) *Api {
 
-	err := db.AutoMigrate(domain.Item{})
+	sqlDB, _ := db.DB()
+	_, err := sqlDB.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";")
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.AutoMigrate(domain.Item{})
 	if err != nil {
 		panic(err)
 	}
