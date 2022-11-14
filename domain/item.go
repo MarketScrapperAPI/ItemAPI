@@ -45,3 +45,17 @@ func (i *Item) ToCreateItemResponse() *pb.CreateItemResponse {
 		ImageUrl:         i.ImageUrl,
 	}
 }
+
+func (i *Item) ToGetItemResponse() *pb.GetItemResponse {
+	return &pb.GetItemResponse{
+		Uuid:             i.Id.String(),
+		Name:             i.Name,
+		Brand:            i.Brand,
+		Package:          i.Package,
+		PricePerItem:     i.PricePerItem,
+		PricePerQuantity: i.PricePerQuantity,
+		QuantityUnit:     i.QuantityUnit,
+		Url:              i.Url,
+		ImageUrl:         i.ImageUrl,
+	}
+}
